@@ -1,29 +1,75 @@
-// Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+// BASE CLASS
+class Character {
+    constructor(imgString, [initLocX, initLocY]) {
+        this.sprite = imgString;
+        this.x = initLocX;
+        this.y = initLocY;
+    }
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
+    // Handle updating character location
+    // Parameter: dt, a time delta between ticks
+    update(dt) {
+        // You should multiply any movement by the dt parameter
+        // which will ensure the game runs at the same speed for
+        // all computers.
+    }
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// SUBCLASS
+class Enemy extends Character {
+    constructor(speed, imgString = 'images/enemy-bug.png', [initLocX, initLocY]) {
+        super(imgString, [initLocX, initLocY]);
+        this.speed = speed;
+    }
+
+    // Update the enemy's position, required method for game
+    update(dt) {
+        // handle updating character location --> from super
+        super.update(dt);
+        // handle collision --> Enemy-specific method
+    }
+
+    // Draw the enemy on the screen, required method for game
+    render() {
+        super.render();
+    }
+}
+
+
+// SUBCLASS
+class Player extends Character {
+    constructor(speed, imgString = 'images/char-cat-girl.png', [initLocX, initLocY]) {
+        super(imgString, [initLocX, initLocY]);
+        // TODO: add any player-specific properties here
+    }
+
+    // Update the player's position, required method for game
+    update(dt) {
+        // handle updating character location --> from super
+        super.update(dt);
+        // handle collision?
+        // handle user input?
+    }
+
+    // Draw the player on the screen, required method for game
+    render() {
+        super.render();
+    }    
+
+    handleInput() {
+
+    }
+
+    resetPlayer() {
+        // If the player reaches the water the game should be
+        // reset by moving the player back to the initial location
+    }
+}
 
 
 // Now instantiate your objects.
