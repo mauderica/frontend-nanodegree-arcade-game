@@ -93,7 +93,9 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+        //player.update(); // Not needed every game tick --> only when the user
+        // presses a key to move the player && performs a valid move is the
+        // player.update() called - see app.js for details.
     }
 
     /* This function initially draws the "game level", it will then call
